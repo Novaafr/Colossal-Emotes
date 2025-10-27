@@ -1,4 +1,4 @@
-﻿// How come I get harassed on discord about fixing ts but never actually see anyone ingame using it 😭, I got like 100 ppl telling me to fix it the day it broke
+// How come I get harassed on discord about fixing ts but never actually see anyone ingame using it 😭, I got like 100 ppl telling me to fix it the day it broke
 
 using BepInEx;
 using Colossal.Patches;
@@ -186,7 +186,7 @@ namespace Colossal
                         if (emoting) // Only run during a emote
                         {
                             // Making you float
-                            GorillaLocomotion.GTPlayer.Instance.bodyCollider.attachedRigidbody.velocity = Vector3.zero;
+                            GorillaLocomotion.GTPlayer.Instance.bodyCollider.attachedRigidbody.linearVelocity = Vector3.zero;
                             GorillaLocomotion.GTPlayer.Instance.bodyCollider.attachedRigidbody.AddForce(-Physics.gravity, ForceMode.Acceleration);
 
 
@@ -249,8 +249,8 @@ namespace Colossal
 
 
             // Moving Kyle to your position
-            AssetBundleLoader.KyleRobot.transform.position = VRRig.LocalRig.transform.Find("RigAnchor/rig/body").position - new Vector3(0f, 1.15f, 0f);
-            AssetBundleLoader.KyleRobot.transform.rotation = VRRig.LocalRig.transform.Find("RigAnchor/rig/body").rotation;
+            AssetBundleLoader.KyleRobot.transform.position = VRRig.LocalRig.transform.Find("GorillaPlayerNetworkedRigAnchor/rig/body").position - new Vector3(0f, 1.15f, 0f);
+            AssetBundleLoader.KyleRobot.transform.rotation = VRRig.LocalRig.transform.Find("GorillaPlayerNetworkedRigAnchor/rig/body").rotation;
 
 
             //DisableCosmetics();
