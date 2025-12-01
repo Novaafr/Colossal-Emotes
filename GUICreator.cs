@@ -33,7 +33,7 @@ namespace Colossal
             Text MenuText = menuTextObj.AddComponent<Text>();
             MenuText.text = text;
             MenuText.fontSize = 10;
-            MenuText.font = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/-- PhysicalComputer UI --/keyboard/Buttons/Text/u").GetComponent<Text>().font;
+            MenuText.font = Plugin.gfont;
             MenuText.rectTransform.sizeDelta = new Vector2(260, 180);
             MenuText.rectTransform.localScale = new Vector3(0.01f, 0.01f, 1f);
             MenuText.rectTransform.localPosition = loctrans;

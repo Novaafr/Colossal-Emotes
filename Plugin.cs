@@ -5,6 +5,7 @@ using Colossal.Patches;
 using Photon.Pun;
 using System;
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -44,12 +45,35 @@ namespace Colossal
         private bool coolDown = false;
         private bool imToLazy = false;
         private bool wasRightTriggerPressed = false;
+        public static Font gfont;
+        static AssetBundle assetBundle;
+        private static void LoadAssetBundle()
+        {
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"ColossalEmotes.AssetBundle.utopium");
+            if (stream != null)
+                assetBundle = AssetBundle.LoadFromStream(stream);
+            else
+                Debug.LogError("Failed to load assetbundle");
+        }
+
+        public static T LoadAsset<T>(string assetName) where T : UnityEngine.Object
+        {
+            if (assetBundle == null)
+                LoadAssetBundle();
+
+            T gameObject = assetBundle.LoadAsset(assetName) as T;
+            return gameObject;
+        }
 
         #region Start and Update
         public void Start()
         {
             HarmonyPatches.ApplyHarmonyPatches();
 
+            GameObject go = LoadAsset<GameObject>("utopium");
+            Text t = go.GetComponent<Text>();
+            Debug.Log("[EMOTES] LOADED " + t.name);
+            gfont = t.font;
 
             // Enables support for Rift
             string[] oculusDlls = Directory.GetFiles(Environment.CurrentDirectory, "OculusXRPlugin.dll", SearchOption.AllDirectories);
